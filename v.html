@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Postkard</title>
+        <meta name="robots" content="noindex" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="postkard.ico">
+        <style>
+        /* default (light mode) */
+        body {
+            font-family: monospace;
+            background-color: #FFFFFF;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #FFFFFF;
+            position: absolute;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+        th {
+            background-color: #E6E6E6;
+        }
+        td, th {
+            border: 1px solid #CFCFCF;
+            text-align: left;
+            padding: 8px;
+        }
+        td.lower {
+            height: 1%;
+        }
+        textarea {
+            border: none;
+            resize: none;
+            width: 90%;
+            font-family: monospace;
+        }
+        textarea.body {
+            height: 100%;
+        }
+        input {
+            font-family: monospace;
+        }
+        button {
+            font-family: monospace;
+            padding: 4px 6px;
+            border-radius: 4px;
+            background-color: #4169DD;
+            color: #fff;
+            border:none;
+            border-bottom: 2px solid #1f3579;
+        }
+        button:hover {
+            background-color: #6080dd;
+        }
+        
+        /* dark mode? */
+        @media (prefers-color-scheme: dark) {}
+        </style>
+        <meta property="og:site_name" content="Postkard">
+        <meta property="og:title" content="Postkard">
+        <meta property="og:description" content="Never open postkards from people you don't know.">
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="lower"><textarea id="time" readonly="true" rows="1"></textarea></td>
+                </tr>
+                <tr>
+                    <td><textarea class="body" id="data" readonly="true"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="lower">go <a href="/">write a postkard</a>!</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+        packetHead = window.location.href;
+        packetData = atob((packetHead.substr(packetHead.search("PVC") + 3, packetHead.length)).replaceAll("-", "/"));
+        packetDivi = packetData.search("X");
+        packetTime = packetData.substr(0, packetDivi);
+        packetBody = packetData.substr(packetDivi + 1, packetData.length);
+
+        let packetTimestamp = parseInt(packetTime);
+        var processTime = new Date(packetTimestamp);
+        
+        var timeHR = processTime.getHours();
+        var timeMI = processTime.getMinutes();
+        var timeMH = (processTime.getMonth()) + 1;
+        var timeDA = processTime.getDate();
+        var timeYR = processTime.getFullYear();
+
+        msgData = document.getElementById("data");
+        msgTime = document.getElementById("time");
+
+        msgTime.value = timeMH + "/" + timeDA + "/" + timeYR + " @ " + timeHR + ":" + timeMI + " (local time)";
+        msgData.value = packetBody;
+        </script>
+    </body>
+</html>
