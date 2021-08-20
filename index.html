@@ -1,6 +1,108 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <p>There's nothing here...</p>
-  </body>
+    <head>
+        <title>Postkard</title>
+        <meta name="robots" content="noindex"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" href="postkard.ico">
+        <style>
+        /* default (light mode) */
+        body {
+            font-family: monospace;
+            background-color: #FFFFFF;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #FFFFFF;
+            position: absolute;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+        th {
+            background-color: #E6E6E6;
+        }
+        td, th {
+            border: 1px solid #CFCFCF;
+            text-align: left;
+            padding: 8px;
+        }
+        td.lower {
+            height: 1%;
+        }
+        textarea {
+            border: none;
+            resize: none;
+            width: 90%;
+            font-family: monospace;
+        }
+        textarea.body {
+            height: 100%;
+        }
+        input {
+            font-family: monospace;
+        }
+        button {
+            font-family: monospace;
+            padding: 4px 6px;
+            border-radius: 4px;
+            background-color: #4169DD;
+            color: #fff;
+            border:none;
+            border-bottom: 2px solid #1f3579;
+        }
+        button:hover {
+            background-color: #6080dd;
+        }
+        
+        /* dark mode? */
+        @media (prefers-color-scheme: dark) {}
+        </style>
+        <meta property="og:site_name" content="Postkard">
+        <meta property="og:title" content="Postkard">
+        <meta property="og:description" content="Write a postkard today!">
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <td><textarea class="body" id="draft" rows="10" placeholder="your message"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="lower"><textarea id="creation" readonly="true" rows="1" placeholder="your postkard url"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="lower">
+                        <button onclick="createPostkard()">create</button>
+                        <button onclick="startNew()">start new</button>
+                        <button onclick="openPostkard()">open</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+        function createPostkard()
+        {
+            var a = new Date();
+            var b = a.getTime();
+            var c = document.getElementById("draft").value;
+            
+            rawData = btoa(b + "X" + c);
+            packetData = rawData.replaceAll("/", "-");
+            document.getElementById("creation").value = "https://postkard.cc/v.html?PVC" + packetData;
+        }
+        function openPostkard()
+        {
+            var x = document.getElementById("creation");
+            if(x.value == "") {}
+            else { window.open(x.value); }
+        }
+        function startNew()
+        {
+            document.getElementById("draft").value = "";
+            document.getElementById("creation").value = "";
+        }
+        </script>
+    </body>
 </html>
