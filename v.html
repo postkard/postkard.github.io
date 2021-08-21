@@ -92,6 +92,8 @@
         var timeMH = (processTime.getMonth()) + 1;
         var timeDA = processTime.getDate();
         var timeYR = processTime.getFullYear();
+            
+        if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
 
         msgData = document.getElementById("data");
         msgTime = document.getElementById("time");
