@@ -46,20 +46,30 @@
             </tbody>
         </table>
         <script>
+        const genErrorMessage = "There was an error.";
+
         function createPostkard()
         {
             var a = new Date();
             var b = a.getTime();
             var c = document.getElementById("draft").value;
-            
-            rawData = btoa(b + "X" + c);
-            packetData = rawData.replaceAll("/", "-");
-            document.getElementById("creation").value = "https://postkard.cc/v?PVC" + packetData;
+
+            try {
+                rawData = btoa(b + "X" + c);
+                packetData = rawData.replaceAll("/", "-");
+                document.getElementById("creation").value = "https://postkard.cc/v?PVC" + packetData;
+            }
+            catch(e)
+            {
+                document.getElementById("creation").value = genErrorMessage;
+            }
         }
         function openPostkard()
         {
+            createPostkard();
+
             var x = document.getElementById("creation");
-            if(x.value == "") {}
+            if(x.value == "" || x.value == genErrorMessage) {}
             else { window.open(x.value); }
         }
         function startNew()
