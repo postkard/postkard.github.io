@@ -9,20 +9,7 @@
         <meta property="og:title" content="Postkard">
         <meta property="og:description" content="Never open postkards from people you don't know.">
         <style>
-        /* default (light mode) */
-        body { font-family: monospace; background-color: #FFFFFF; }
-        table { border-collapse: collapse; width: 100%; background-color: #FFFFFF; position: absolute; height: 100%; top: 0px; left: 0px; }
-        th { background-color: #E6E6E6; }
-        td, th { border: 1px solid #CFCFCF; text-align: left; padding: 8px; }
-        td.lower { height: 1%; }
-        textarea { border: none; resize: none; width: 90%; font-family: monospace; }
-        textarea.body { height: 100%; }
-        input { font-family: monospace; }
-        button { font-family: monospace; padding: 4px 6px; border-radius: 4px; background-color: #4169DD; color: #FFFFFF; border:none; border-bottom: 2px solid #1F3579; }
-        button:hover { background-color: #6080DD; }
-        
-        /* dark mode? */
-        @media (prefers-color-scheme: dark) {}
+            body{font-family:monospace;background-color:#FFFFFF;}table{border-collapse:collapse;width:100%;background-color:#FFFFFF;position:absolute;height:100%;top:0px;left:0px;}th{background-color:#E6E6E6;}td,th{border:1px solid #CFCFCF;text-align:left;padding:8px;}td.lower{height:1%;}textarea{border:none;resize:none;width:90%;font-family:monospace;}textarea.body{height:100%;}input{font-family:monospace;}button{font-family:monospace;padding:4px 6px;border-radius:4px;background-color:#4169DD;color:#fff;border:none;border-bottom:2px solid #1F3579;}button:hover{background-color:#6080DD;}
         </style>
     </head>
     <body>
@@ -49,18 +36,13 @@
         let packetTimestamp = parseInt(packetTime);
         var processTime = new Date(packetTimestamp);
         
-        var timeHR = processTime.getHours();
         var timeMI = processTime.getMinutes();
-        var timeMH = (processTime.getMonth()) + 1;
-        var timeDA = processTime.getDate();
-        var timeYR = processTime.getFullYear();
-            
         if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
 
         msgData = document.getElementById("data");
         msgTime = document.getElementById("time");
 
-        msgTime.value = timeMH + "/" + timeDA + "/" + timeYR + " @ " + timeHR + ":" + timeMI + " (local time)";
+        msgTime.value = ((processTime.getMonth()) + 1) + "/" + processTime.getDate() + "/" + processTime.getFullYear() + " @ " + processTime.getHours() + ":" + timeMI + " (local time)";
         msgData.value = packetBody;
         </script>
     </body>
