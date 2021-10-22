@@ -33,37 +33,47 @@
             </tbody>
         </table>
         <script>
-        const genErrorMessage = "There was an error.";
+		var genErrorMessage = "There was an error.";
 
-        function createPostkard()
-        {
-            var a = new Date();
-            var b = a.getTime();
-            var c = document.getElementById("draft").value;
+		function createPostkard() {
+			var a = new Date();
+			var b = a.getTime();
+			var c = document.getElementById("draft");
 
-            try {
-                rawData = btoa(b + "X" + c);
-                packetData = rawData.replaceAll("/", "-");
-                document.getElementById("creation").value = "https://postkard.cc/v?PVC" + packetData;
-            }
-            catch(e)
-            {
-                document.getElementById("creation").value = genErrorMessage;
-            }
-        }
-        function openPostkard()
-        {
-            createPostkard();
+			/* mobile quote stuff */
+			c.value = c.value.replaceAll(String.fromCharCode(8220), '"');
+			c.value = c.value.replaceAll(String.fromCharCode(8221), '"');
+			c.value = c.value.replaceAll(String.fromCharCode(8217), "'");
+			c.value = c.value.replaceAll(String.fromCharCode(8216), "'");
 
-            var x = document.getElementById("creation");
-            if(x.value == "" || x.value == genErrorMessage) {}
-            else { window.open(x.value); }
-        }
-        function startNew()
-        {
-            document.getElementById("draft").value = "";
-            document.getElementById("creation").value = "";
-        }
+			/* emoji stuff */
+			c.value = c.value.replaceAll(String.fromCharCode(55357) + String.fromCharCode(56448), ":skull:");
+			c.value = c.value.replaceAll(String.fromCharCode(10084) + String.fromCharCode(65039), ":heart:");
+			c.value = c.value.replaceAll(String.fromCharCode(55357) + String.fromCharCode(56834), ":laugh:");
+			c.value = c.value.replaceAll(String.fromCharCode(55357) + String.fromCharCode(56840), ":evsml:");
+
+			try {
+				rawData = btoa(b + "X" + c.value);
+				packetData = rawData.replaceAll("/", "-");
+				document.getElementById("creation").value = "https://postkard.cc/v?PVC" + packetData;
+			}
+			catch(e) {
+				document.getElementById("creation").value = genErrorMessage;
+			}
+		}
+
+		function openPostkard() {
+			createPostkard();
+
+			var x = document.getElementById("creation");
+			if(x.value == "" || x.value == genErrorMessage) {}
+			else { window.open(x.value); }
+		}
+
+		function startNew() {
+			document.getElementById("draft").value = "";
+			document.getElementById("creation").value = "";
+		}
         </script>
     </body>
 </html>
