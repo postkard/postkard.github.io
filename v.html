@@ -27,23 +27,29 @@
             </tbody>
         </table>
         <script>
-        packetHead = window.location.href;
-        packetData = atob((packetHead.substr(packetHead.search("PVC") + 3, packetHead.length)).replaceAll("-", "/"));
-        packetDivi = packetData.search("X");
-        packetTime = packetData.substr(0, packetDivi);
-        packetBody = packetData.substr(packetDivi + 1, packetData.length);
+		var packetHead = window.location.href;
+		var packetData = atob((packetHead.substr(packetHead.search("PVC") + 3, packetHead.length)).replaceAll("-", "/"));
+		var packetDivi = packetData.search("X");
+		var packetTime = packetData.substr(0, packetDivi);
+		var packetBody = packetData.substr(packetDivi + 1, packetData.length);
 
-        let packetTimestamp = parseInt(packetTime);
-        var processTime = new Date(packetTimestamp);
-        
-        var timeMI = processTime.getMinutes();
-        if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
+		var packetTimestamp = parseInt(packetTime);
+		var processTime = new Date(packetTimestamp);
+		
+		var timeMI = processTime.getMinutes();
+		if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
 
-        msgData = document.getElementById("data");
-        msgTime = document.getElementById("time");
+		/* emoji stuff */
+		packetBody = packetBody.replaceAll(":skull:", String.fromCharCode(55357) + String.fromCharCode(56448));
+		packetBody = packetBody.replaceAll(":heart:", String.fromCharCode(10084) + String.fromCharCode(65039));
+		packetBody = packetBody.replaceAll(":laugh:", String.fromCharCode(55357) + String.fromCharCode(56834));
+		packetBody = packetBody.replaceAll(":evsml:", String.fromCharCode(55357) + String.fromCharCode(56840));
 
-        msgTime.value = ((processTime.getMonth()) + 1) + "/" + processTime.getDate() + "/" + processTime.getFullYear() + " @ " + processTime.getHours() + ":" + timeMI + " (local time)";
-        msgData.value = packetBody;
+		var msgData = document.getElementById("data");
+		var msgTime = document.getElementById("time");
+
+		msgTime.value = ((processTime.getMonth()) + 1) + "/" + processTime.getDate() + "/" + processTime.getFullYear() + " @ " + processTime.getHours() + ":" + timeMI + " (local time)";
+		msgData.value = packetBody;
         </script>
     </body>
 </html>
