@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Postkard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="icon" href="postkard.ico">
-        <meta property="og:site_name" content="Postkard">
-        <meta property="og:title" content="Postkard">
-        <meta property="og:description" content="Write a postkard today!">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="white">
-        <link rel="apple-touch-icon" href="postkardapp.png">
-        <style>
-            body{font-family:monospace;background-color:#FFFFFF;}table{border-collapse:collapse;width:100%;background-color:#FFFFFF;position:absolute;height:100%;top:0px;left:0px;}th{background-color:#E6E6E6;}td,th{border:1px solid #CFCFCF;text-align:left;padding:8px;}td.lower{height:1%;}textarea{border:none;resize:none;width:90%;font-family:monospace;}textarea.body{height:100%;}input{font-family:monospace;}button{font-family:monospace;padding:4px 6px;border-radius:4px;background-color:#4169DD;color:#fff;border:none;border-bottom:2px solid #1F3579;}button:hover{background-color:#6080DD;}
-        </style>
-    </head>
-    <body>
-        <table>
-            <tbody>
-                <tr>
-                    <td><textarea class="body" id="draft" rows="10" placeholder="your message"></textarea></td>
-                </tr>
-                <tr>
-                    <td class="lower"><textarea id="creation" readonly="true" rows="1" placeholder="your postkard url"></textarea></td>
-                </tr>
-                <tr>
-                    <td class="lower">
-                        <button onclick="createPostkard()">create</button>
-                        <button onclick="startNew()">start new</button>
-                        <button onclick="openPostkard()">open</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <script>
+	<head>
+		<title>Postkard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="icon" href="postkard.ico">
+		<meta property="og:site_name" content="Postkard">
+		<meta property="og:title" content="Postkard">
+		<meta property="og:description" content="Write a postkard today!">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="white">
+		<link rel="apple-touch-icon" href="postkardapp.png">
+		<style>body{font-family:monospace;background-color:#FFFFFF;}table{border-collapse:collapse;width:100%;background-color:#FFFFFF;position:absolute;height:100%;top:0px;left:0px;}th{background-color:#E6E6E6;}td,th{border:1px solid #CFCFCF;text-align:left;padding:8px;}td.lower{height:1%;}textarea{border:none;resize:none;width:90%;font-family:monospace;}textarea.body{height:100%;outline:none;}input{font-family:monospace;}button{font-family:monospace;padding:4px 6px;border-radius:4px;background-color:#4169DD;color:#fff;border:none;border-bottom:2px solid #1F3579;}button:hover{background-color:#6080DD;}</style>
+	</head>
+	<body>
+		<table>
+			<tbody>
+				<tr>
+					<td><textarea class="body" id="draft" rows="10" placeholder="your message"></textarea></td>
+				</tr>
+				<tr>
+					<td class="lower"><textarea id="creation" readonly="true" rows="1" placeholder="your postkard url"></textarea></td>
+				</tr>
+				<tr>
+					<td class="lower">
+						<button onclick="createPostkard()">create</button>
+						<button onclick="startNew()">start new</button>
+						<button onclick="openPostkard()">open</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
 		var genErrorMessage = "There was an error.";
 
 		function createPostkard() {
@@ -75,6 +73,6 @@
 			document.getElementById("draft").value = "";
 			document.getElementById("creation").value = "";
 		}
-        </script>
-    </body>
+		</script>
+	</body>
 </html>
