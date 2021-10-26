@@ -24,8 +24,9 @@
 				<tr>
 					<td class="lower">
 						<button onclick="createPostkard()">create</button>
-						<button onclick="startNew()">start new</button>
+						<button onclick="startNew()">reset</button>
 						<button onclick="openPostkard()">open</button>
+						<button onclick="copyPostkard()">copy</button>
 					</td>
 				</tr>
 			</tbody>
@@ -72,6 +73,12 @@
 		function startNew() {
 			document.getElementById("draft").value = "";
 			document.getElementById("creation").value = "";
+		}
+			
+		function copyPostkard() {
+			var x = document.getElementById("creation");
+			if(x.value == "" || x.value == genErrorMessage) {}
+			else { navigator.clipboard.writeText(x.value); }
 		}
 		</script>
 	</body>
