@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>View Postkard</title>
-        <meta name="robots" content="noindex" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="postkard.ico">
-        <meta property="og:site_name" content="Postkard">
-        <meta property="og:title" content="Postkard">
-        <meta property="og:description" content="Never open postkards from people you don't know.">
-        <style>
-            body{font-family:monospace;background-color:#FFFFFF;}table{border-collapse:collapse;width:100%;background-color:#FFFFFF;position:absolute;height:100%;top:0px;left:0px;}th{background-color:#E6E6E6;}td,th{border:1px solid #CFCFCF;text-align:left;padding:8px;}td.lower{height:1%;}textarea{border:none;resize:none;width:90%;font-family:monospace;}textarea.body{height:100%;}input{font-family:monospace;}button{font-family:monospace;padding:4px 6px;border-radius:4px;background-color:#4169DD;color:#fff;border:none;border-bottom:2px solid #1F3579;}button:hover{background-color:#6080DD;}
-        </style>
-    </head>
-    <body>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="lower"><textarea id="time" readonly="true" rows="1"></textarea></td>
-                </tr>
-                <tr>
-                    <td><textarea class="body" id="data" readonly="true"></textarea></td>
-                </tr>
-                <tr>
-                    <td class="lower">go <a href="/">write a postkard</a>!</td>
-                </tr>
-            </tbody>
-        </table>
-        <script>
-		var packetHead = window.location.href;
-		var packetData = atob((packetHead.substr(packetHead.search("PVC") + 3, packetHead.length)).replaceAll("-", "/"));
-		var packetDivi = packetData.search("X");
-		var packetTime = packetData.substr(0, packetDivi);
-		var packetBody = packetData.substr(packetDivi + 1, packetData.length);
+	<head>
+		<title>View Postkard</title>
+		<meta name="robots" content="noindex" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="postkard.ico">
+		<meta property="og:site_name" content="Postkard">
+		<meta property="og:title" content="Postkard">
+		<meta property="og:description" content="Never open postkards from people you don't know.">
+		<link rel="apple-touch-icon" href="postkardapp.png">
+		<style>body{font-family:monospace;background-color:#FFFFFF;}table{border-collapse:collapse;width:100%;background-color:#FFFFFF;position:absolute;height:100%;top:0px;left:0px;}th{background-color:#E6E6E6;}td,th{border:1px solid #CFCFCF;text-align:left;padding:8px;}td.lower{height:1%;}textarea{border:none;resize:none;width:90%;font-family:monospace;}textarea.body{height:100%;}input{font-family:monospace;}button{font-family:monospace;padding:4px 6px;border-radius:4px;background-color:#4169DD;color:#fff;border:none;border-bottom:2px solid #1F3579;}button:hover{background-color:#6080DD;}@media (prefers-color-scheme:dark){body{background-color:#111; color:#dbdbdb}table{background-color:#111;}textarea{background-color:#111;color:#fafafa;}td,th{border:1px solid #444444;}button{background-color:#505050;color:#fff;border-bottom:2px solid #303030;}button:hover{background-color:#707070;}a{color:#fff;}}</style>
+	</head>
+	<body>
+		<table>
+			<tbody>
+				<tr>
+					<td class="lower"><textarea id="time" readonly="true" rows="1"></textarea></td>
+				</tr>
+				<tr>
+					<td><textarea class="body" id="data" readonly="true"></textarea></td>
+				</tr>
+				<tr>
+					<td class="lower">go <a href="/">write a postkard</a>!</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			var packetHead = window.location.href;
+			var packetData = atob((packetHead.substr(packetHead.search("PVC") + 3, packetHead.length)).replaceAll("-", "/"));
+			var packetDivi = packetData.search("X");
+			var packetTime = packetData.substr(0, packetDivi);
+			var packetBody = packetData.substr(packetDivi + 1, packetData.length);
 
-		var packetTimestamp = parseInt(packetTime);
-		var processTime = new Date(packetTimestamp);
+			var packetTimestamp = parseInt(packetTime);
+			var processTime = new Date(packetTimestamp);
 		
-		var timeMI = processTime.getMinutes();
-		if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
+			var timeMI = processTime.getMinutes();
+			if(timeMI <= 9) { timeMI = "0" + timeMI.toString(); }
 
-		/* emoji stuff */
-		packetBody = packetBody.replaceAll(":skull:", String.fromCharCode(55357) + String.fromCharCode(56448));
-		packetBody = packetBody.replaceAll(":heart:", String.fromCharCode(10084) + String.fromCharCode(65039));
-		packetBody = packetBody.replaceAll(":laugh:", String.fromCharCode(55357) + String.fromCharCode(56834));
-		packetBody = packetBody.replaceAll(":lacry:", String.fromCharCode(55357) + String.fromCharCode(56877));
-		packetBody = packetBody.replaceAll(":evsml:", String.fromCharCode(55357) + String.fromCharCode(56840));
+			/* emoji stuff */
+			packetBody = packetBody.replaceAll(":skull:", String.fromCharCode(55357) + String.fromCharCode(56448));
+			packetBody = packetBody.replaceAll(":heart:", String.fromCharCode(10084) + String.fromCharCode(65039));
+			packetBody = packetBody.replaceAll(":laugh:", String.fromCharCode(55357) + String.fromCharCode(56834));
+			packetBody = packetBody.replaceAll(":lacry:", String.fromCharCode(55357) + String.fromCharCode(56877));
+			packetBody = packetBody.replaceAll(":evsml:", String.fromCharCode(55357) + String.fromCharCode(56840));
 
-		var msgData = document.getElementById("data");
-		var msgTime = document.getElementById("time");
+			var msgData = document.getElementById("data");
+			var msgTime = document.getElementById("time");
 
-		msgTime.value = ((processTime.getMonth()) + 1) + "/" + processTime.getDate() + "/" + processTime.getFullYear() + " @ " + processTime.getHours() + ":" + timeMI + " (local time)";
-		msgData.value = packetBody;
-        </script>
-    </body>
+			msgTime.value = ((processTime.getMonth()) + 1) + "/" + processTime.getDate() + "/" + processTime.getFullYear() + " @ " + processTime.getHours() + ":" + timeMI + " (local time)";
+			msgData.value = packetBody;
+		</script>
+	</body>
 </html>
